@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +26,22 @@ namespace Wpf_picture_draw_d_z_shambala
         public MainWindow()
         {
             InitializeComponent();
+           
         }
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+            // ... Create a new BitmapImage.
+            BitmapImage b = new BitmapImage();
+            b.BeginInit();
+            b.UriSource = new Uri("Images/cad.png", UriKind.Relative);
+            b.EndInit();
 
-            private void Canvas_MouseDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+            // ... Get Image reference from sender.
+            var image = sender as Image;
+            // ... Assign Source.
+            image.Source = b;
+        }
+        private void Canvas_MouseDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
             {
                 if (e.ButtonState == MouseButtonState.Pressed)
                     currentPoint = e.GetPosition(this);
@@ -37,15 +52,12 @@ namespace Wpf_picture_draw_d_z_shambala
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
                     Line line = new Line();
-
                     line.Stroke = SystemColors.WindowFrameBrush;
                     line.X1 = currentPoint.X;
                     line.Y1 = currentPoint.Y;
                     line.X2 = e.GetPosition(this).X;
                     line.Y2 = e.GetPosition(this).Y;
-
                     currentPoint = e.GetPosition(this);
-
                     paintSurface.Children.Add(line);
                 }
             }

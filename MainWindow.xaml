@@ -7,9 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Image
+            x:Name="myImage" Width="800" Height="400" 
+            Loaded="Image_Loaded"/>
         <Canvas  Name="paintSurface" MouseDown="Canvas_MouseDown_1" MouseMove="Canvas_MouseMove_1" >
             <Canvas.Background>
-                <SolidColorBrush Color="White" Opacity="0"/>
+                <SolidColorBrush Color="White" Opacity="5"/>
             </Canvas.Background>
         </Canvas>
     </Grid>
